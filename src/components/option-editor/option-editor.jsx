@@ -40,7 +40,8 @@ class OptionEditor extends Component {
     onChange: PropTypes.func,
     onApply: PropTypes.func,
     placeholder: PropTypes.string,
-    schemaFields: PropTypes.array
+    schemaFields: PropTypes.array,
+    dRefs: PropTypes.any
   };
 
   static defaultProps = {
@@ -119,6 +120,7 @@ class OptionEditor extends Component {
         mode="mongodb"
         theme="mongodb-query"
         width="80%"
+        ref={this.props.dRefs ? this.props.dRefs[1]('editor_' + this.props.label) : undefined}
         value={this.props.value}
         onChange={this.onChangeQuery}
         editorProps={{ $blockScrolling: Infinity }}

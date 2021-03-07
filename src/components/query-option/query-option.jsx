@@ -5,6 +5,7 @@ import { InfoSprinkle } from 'hadron-react-components';
 import OptionEditor from 'components/option-editor';
 
 import styles from './query-option.less';
+import AceEditor from 'react-ace';
 
 class QueryOption extends Component {
   static displayName = 'QueryOption';
@@ -17,6 +18,7 @@ class QueryOption extends Component {
     actions: PropTypes.object.isRequired,
     inputType: PropTypes.oneOf(['numeric', 'boolean', 'document']).isRequired,
     value: PropTypes.any,
+    dRefs: PropTypes.any,
     autoPopulated: PropTypes.bool,
     hasToggle: PropTypes.bool,
     hasError: PropTypes.bool,
@@ -76,6 +78,7 @@ class QueryOption extends Component {
       <OptionEditor
         label={this.props.label}
         value={this.props.value}
+        dRefs={this.props.dRefs}
         serverVersion={this.props.serverVersion}
         onChange={this.props.onChange}
         onApply={this.props.onApply}

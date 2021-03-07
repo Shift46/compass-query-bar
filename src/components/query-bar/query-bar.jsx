@@ -15,6 +15,7 @@ import {
 import QueryOption from 'components/query-option';
 import OptionsToggle from 'components/options-toggle';
 import QUERY_PROPERTIES from 'constants/query-properties';
+import useDynamicRefs from 'use-dynamic-refs';
 
 import styles from './query-bar.less';
 
@@ -118,6 +119,12 @@ class QueryBar extends Component {
 
   state = {
     hasFocus: false
+  };
+  
+  constructor() {
+    super();
+
+    this.dRefs = useDynamicRefs();
   }
 
   onChange(label, evt) {
@@ -201,7 +208,7 @@ class QueryBar extends Component {
    *
    * @return {Component}          the option component
    */
-  renderOption(option, id, hasToggle) {
+  renderOption = (option, id, hasToggle) => {
     const { filterValid, featureFlag, autoPopulated } = this.props;
 
     // for filter only, also validate feature flag directives
@@ -219,6 +226,7 @@ class QueryBar extends Component {
     return (
       <QueryOption
         label={label}
+        dRefs={this.dRefs}
         autoPopulated={autoPopulated}
         serverVersion={this.props.serverVersion}
         hasToggle={hasToggle}
@@ -291,6 +299,13 @@ class QueryBar extends Component {
     return rows.slice(0, 1);
   }
 
+  _loadTemplate = (id) => {
+    const editor = this.dRefs[0]('editor_filter').current.editor;
+    
+    editor.setValue(`{ "some_value": "10000${id}" }`);
+    editor.clearSelection();
+  };
+
   /**
    * Render Query Bar input form (just the input fields and buttons).
    *
@@ -336,6 +351,11 @@ class QueryBar extends Component {
           className={_queryOptionClassName}>
           {this.renderOptionRows()}
           {this.renderToggle()}
+          <div>
+            <button onClick={() => this._loadTemplate(1)}>Template 1</button>
+            <button onClick={() => this._loadTemplate(2)}>Template 2</button>
+            <button onClick={() => this._loadTemplate(3)}>Template 3</button>
+          </div>
         </div>
         <div className={classnames(styles['button-group'])}>
           <button

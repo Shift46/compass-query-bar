@@ -51,9 +51,9 @@
     "mongodb-query-parser": "*",
     "prop-types": "^15.7.2",
     "react": "^16.8.0",
-    "react-dom": "^16.8.0",
     "react-ace": "^6.1.1",
     "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.8.0",
     "react-fontawesome": "^1.6.1",
     "reflux": "^0.4.1",
     "reflux-state-mixin": "^0.8.0"
@@ -157,6 +157,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "mongodb-query-util": "^0.2.1"
+    "mongodb-query-util": "^0.2.1",
+    "use-dynamic-refs": "^1.0.0"
   }
 }
